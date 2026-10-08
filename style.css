@@ -1,0 +1,211 @@
+/* Kleuren: geïnspireerd op de Friese vlag */
+:root {
+  --blue: #1f4e8c;
+  --blue-light: #e8eef7;
+  --red: #c8102e;
+  --ink: #18202c;
+  --muted: #5a6474;
+  --line: #d9dee6;
+  --bg: #ffffff;
+  --measure: 62ch;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --blue: #8fb3e8;
+    --blue-light: #1b2638;
+    --red: #ff6b7d;
+    --ink: #e9edf3;
+    --muted: #a3acba;
+    --line: #2c3646;
+    --bg: #111822;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Schibsted Grotesk", system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+a { color: var(--blue); text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible, .button:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+h1, h2, h3 { line-height: 1.15; margin: 0; }
+p { margin: 0 0 1em; }
+p:last-child { margin-bottom: 0; }
+
+/* ---------- Hero ---------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 34%;
+  min-height: 82vh;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-text {
+  padding: clamp(2.5rem, 8vw, 6rem) clamp(1.25rem, 6vw, 5rem);
+  align-self: center;
+}
+
+h1 {
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  max-width: 8ch;
+  margin-bottom: 1.5rem;
+}
+
+.lead {
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  color: var(--muted);
+  max-width: 36ch;
+}
+
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin: 2.25rem 0 1.75rem;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--red);
+  background: var(--blue-light);
+  max-width: 34rem;
+}
+.status p { margin: 0; font-weight: 600; }
+
+.button {
+  display: inline-block;
+  padding: 0.55rem 1.1rem;
+  background: var(--blue);
+  color: var(--bg);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.button:hover { filter: brightness(1.12); }
+
+.links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1.5rem;
+  font-weight: 600;
+}
+
+/* Diagonale strepen van de Friese vlag */
+.flag {
+  background: repeating-linear-gradient(
+    -55deg,
+    var(--blue) 0 44px,
+    var(--bg) 44px 88px
+  );
+}
+
+/* ---------- Secties ---------- */
+
+main { padding: 0 clamp(1.25rem, 6vw, 5rem); }
+
+section {
+  display: grid;
+  grid-template-columns: minmax(10rem, 15rem) minmax(0, var(--measure));
+  gap: 1rem 3rem;
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--line);
+}
+section:last-child { border-bottom: 0; }
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--blue);
+}
+
+h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.35rem; }
+
+/* Projecten */
+.project + .project {
+  margin-top: 2.25rem;
+  padding-top: 2.25rem;
+  border-top: 1px dashed var(--line);
+}
+
+.tags {
+  list-style: none;
+  padding: 0;
+  margin: 0.9rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.tags li {
+  font-size: 0.875rem;
+  padding: 0.15rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+}
+
+/* Tijdlijn: echt een volgorde, dus een <ol> */
+.timeline { list-style: none; padding: 0; margin: 0; }
+.timeline li {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 1.25rem;
+}
+.timeline li + li { margin-top: 2rem; }
+.when {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.1rem;
+}
+.where { color: var(--muted); margin-bottom: 0.35rem; }
+
+/* Vaardigheden */
+.skills { margin: 0; }
+.skills div {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;
+  gap: 1.25rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.skills div:first-child { padding-top: 0; }
+.skills div:last-child { border-bottom: 0; }
+.skills dt { color: var(--muted); }
+.skills dd { margin: 0; font-weight: 600; }
+
+/* Footer */
+footer {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 2rem clamp(1.25rem, 6vw, 5rem) 3rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+footer p { margin: 0; }
+.pompeblad { width: 1.1rem; height: 1.1rem; fill: var(--red); }
+
+/* ---------- Mobiel ---------- */
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; min-height: 0; }
+  .flag { height: 56px; order: -1; }
+  section { grid-template-columns: 1fr; padding: 3rem 0; }
+  .timeline li, .skills div { grid-template-columns: 1fr; gap: 0.15rem; }
+}
