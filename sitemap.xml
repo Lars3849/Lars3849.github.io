@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://larstjalsma.dev/</loc>
-  </url>
+  <url><loc>https://larstjalsma.dev/</loc></url>
+  <url><loc>https://larstjalsma.dev/projecten.html</loc></url>
+  <url><loc>https://larstjalsma.dev/puzzelspel.html</loc></url>
+  <url><loc>https://larstjalsma.dev/slaapomgevingsmeter.html</loc></url>
+  <url><loc>https://larstjalsma.dev/opleiding.html</loc></url>
+  <url><loc>https://larstjalsma.dev/over-mij.html</loc></url>
 </urlset>

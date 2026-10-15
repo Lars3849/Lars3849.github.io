@@ -4,18 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lars Tjalsma</title>
-  <meta name="description" content="Lars Tjalsma, HBO ICT-student Software Engineering aan NHL Stenden. Op zoek naar een stage vanaf februari 2027.">
+  <meta name="description" content="Lars Tjalsma, tweedejaars HBO ICT-student Software Engineering aan NHL Stenden. Op zoek naar een stage vanaf februari 2027.">
   <meta property="og:title" content="Lars Tjalsma">
-  <meta property="og:description" content="HBO ICT-student Software Engineering aan NHL Stenden. Op zoek naar een stage vanaf februari 2027.">
+  <meta property="og:description" content="Lars Tjalsma, tweedejaars HBO ICT-student Software Engineering aan NHL Stenden. Op zoek naar een stage vanaf februari 2027.">
   <meta property="og:url" content="https://larstjalsma.dev/">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#f5f3ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://larstjalsma.dev/">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="canonical" href="https://larstjalsma.dev/">
-
-  <!-- Vertelt Google wie je bent en welke profielen bij jou horen -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -24,206 +25,152 @@
     "url": "https://larstjalsma.dev/",
     "jobTitle": "HBO ICT-student Software Engineering",
     "alumniOf": "RSG Magister Alvinus",
-    "affiliation": {
-      "@type": "CollegeOrUniversity",
-      "name": "NHL Stenden Hogeschool"
-    },
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Workum",
-      "addressCountry": "NL"
-    },
-    "knowsAbout": ["C#", "Java", "SQL", "Blazor", "WPF", "JavaFX", "Haskell", "HTML", "CSS"],
+    "affiliation": { "@type": "CollegeOrUniversity", "name": "NHL Stenden Hogeschool" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Workum", "addressCountry": "NL" },
+    "knowsAbout": ["C#", "Java", "SQL", "MySQL", "Blazor", "WPF", "JavaFX", "Haskell", "HTML", "CSS", "Arduino", "MQTT"],
     "knowsLanguage": ["nl", "fy", "en"],
-    "sameAs": [
-      "https://github.com/Lars3849",
-      "https://www.linkedin.com/in/lars-tjalsma"
-    ]
+    "sameAs": ["https://github.com/Lars3849", "https://www.linkedin.com/in/lars-tjalsma"]
   }
   </script>
 </head>
 <body>
+  <a class="skip" href="#inhoud">Naar de inhoud</a>
 
-  <header class="hero">
-    <div class="hero-text">
-      <h1>Lars Tjalsma</h1>
-      <p class="lead">
-        Tweedejaars HBO ICT-student Software Engineering aan NHL Stenden in Leeuwarden.
-        Ik bouw applicaties en websites in C#, Java, SQL, HTML en CSS.
-      </p>
-
-      <div class="status">
-        <p>Ik zoek een stageplek vanaf februari 2027.</p>
-        <a class="button" href="mailto:larstjalsma@gmail.com">Mail me</a>
-      </div>
-
-      <ul class="links">
-        <li><a href="https://github.com/Lars3849">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/lars-tjalsma">LinkedIn</a></li>
-      </ul>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="index.html">lars<span>.</span>tjalsma</a>
+      <nav aria-label="Hoofdmenu">
+        <ul class="nav">
+          <li><a href="index.html" aria-current="page">home</a></li>
+          <li><a href="projecten.html">projecten</a></li>
+          <li><a href="opleiding.html">opleiding</a></li>
+          <li><a href="over-mij.html">over mij</a></li>
+        </ul>
+      </nav>
     </div>
-
-    <div class="flag" aria-hidden="true"></div>
   </header>
 
-  <main>
-
-    <section id="over-mij">
-      <h2>Over mij</h2>
-      <div class="content">
-        <p>
-          Ik ben tweedejaars student HBO ICT, richting Software Engineering, en woon in
-          Workum. Ik heb een brede basis in programmeren en webdevelopment en bouw het
-          liefst applicaties en websites die echt werken en gebruikt worden.
-        </p>
-        <p>
-          Sinds 2023 werk ik naast mijn studie bij Poiesz in Workum. Daar heb ik geleerd
-          zelfstandig te werken, goed samen te werken in een team en klantgericht te
-          blijven, ook als het druk is.
-        </p>
-        <p>
-          Voor mijn stage zoek ik een plek in de IT waar ik mijn technische kennis kan
-          toepassen, van ervaren collega's kan leren en mezelf verder kan ontwikkelen als
-          software engineer.
-        </p>
-        <p>
-          Buiten het programmeren doe ik aan krachttraining, tennis en kickboksen. Dat
-          leert me doorzetten en discipline.
-        </p>
-      </div>
-    </section>
-
-    <section id="projecten">
-      <h2>Projecten</h2>
-      <div class="content">
-
-        <article class="project">
-          <h3>Supermarkt-simulator</h3>
-          <p>
-            Schoolproject voor Object Oriented Development. Een simulatie van een
-            supermarkt met klanten, kassa's, vakkenvullers en een magazijn. Eerst
-            ontworpen met use-case- en klassendiagrammen, daarna gebouwd in JavaFX.
+  <main id="inhoud">
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <p class="kicker"><b>&gt;</b> hbo ict · software engineering · nhl stenden</p>
+          <h1>Lars Tjalsma<span class="dot">.</span></h1>
+          <p class="lead">
+            Tweedejaars student Software Engineering. Ik bouw applicaties en websites die
+            echt werken en gebruikt worden, in C#, Java, SQL, HTML en CSS.
           </p>
-          <ul class="tags">
-            <li>Java</li><li>JavaFX</li><li>UML</li>
-          </ul>
-        </article>
+          <p class="pill">Beschikbaar voor stage vanaf februari 2027</p>
+          <div class="actions">
+            <a class="button" href="mailto:larstjalsma@gmail.com">Mail me</a>
+            <a class="button ghost" href="projecten.html">Bekijk projecten</a>
+          </div>
+        </div>
 
-        <article class="project">
-          <h3>WordPress-websites</h3>
+        <div class="code" role="img" aria-label="Codevoorbeeld met een korte samenvatting: student HBO ICT Software Engineering bij NHL Stenden, tweede jaar, stage vanaf februari 2027, werkt met C#, Java, SQL en Blazor.">
+          <div class="code-bar" aria-hidden="true"><i></i><i></i><i></i><span>Student.cs</span></div>
+<pre aria-hidden="true"><code><span class="k">var</span> lars = <span class="k">new</span> Student
+{
+    Opleiding = <span class="s">"HBO ICT, Software Engineering"</span>,
+    School    = <span class="s">"NHL Stenden, Leeuwarden"</span>,
+    Jaar      = <span class="n">2</span>,
+    Stack     = [<span class="s">"C#"</span>, <span class="s">"Java"</span>, <span class="s">"SQL"</span>, <span class="s">"Blazor"</span>],
+    Stage     = <span class="s">"februari 2027"</span>,
+};
+
+<span class="c">// zoekt: een team om van te leren</span>
+lars.Solliciteer();</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="kicker"><b>01</b> / projecten</p>
+            <h2>Wat ik heb gebouwd</h2>
+          </div>
+          <a href="projecten.html">alle projecten →</a>
+        </div>
+
+        <div class="cards">
+          <article class="card has-link">
+            <p class="meta"><b>jaar 1</b> · periode 1</p>
+            <h3><a href="puzzelspel.html">Puzzelspel</a></h3>
+            <p>Een 2D-puzzelspel met een stripboekenthema, ontworpen met interviews, user stories, schetsen en usability tests.</p>
+            <ul class="tags"><li>C#</li><li>WPF</li><li>Figma</li></ul>
+          </article>
+          <article class="card has-link">
+            <p class="meta"><b>jaar 1</b> · periode 2</p>
+            <h3><a href="slaapomgevingsmeter.html">Slaapomgevingsmeter</a></h3>
+            <p>Een Arduino met vijf sensoren die meet hoe goed je slaapkamer is om in te slapen, met lcd, led en een live dashboard.</p>
+            <ul class="tags"><li>Arduino</li><li>C++</li><li>MQTT</li><li>JavaScript</li></ul>
+          </article>
+          <article class="card">
+            <p class="meta"><b>jaar 1</b> · periode 3</p>
+            <h3>Database-consoleapp</h3>
+            <p>Een consoleapplicatie in C# die gegevens opslaat en ophaalt uit een MySQL-database.</p>
+            <ul class="tags"><li>C#</li><li>MySQL</li><li>SQL</li></ul>
+          </article>
+          <article class="card">
+            <p class="meta"><b>jaar 1</b> · periode 4</p>
+            <h3>Vorderingenportaal CJIB</h3>
+            <p>Een webapplicatie in Blazor: een vorderingenportaal, gemaakt voor het CJIB als opdrachtgever.</p>
+            <ul class="tags"><li>C#</li><li>Blazor</li><li>.NET</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap split">
+        <div>
+          <p class="kicker"><b>02</b> / kort</p>
+          <h2>Over mij</h2>
+        </div>
+        <div class="prose">
           <p>
-            Naast mijn studie maak ik WordPress-websites voor kennissen: van de opzet en
-            vormgeving tot het vullen met content.
+            Ik woon in Workum en studeer HBO ICT aan NHL Stenden in Leeuwarden, richting
+            Software Engineering. Mijn propedeuse heb ik in het eerste jaar gehaald. In dat
+            jaar bouwde ik onder meer een WPF-game, een IoT-apparaat, een database-app en
+            een Blazor-website.
           </p>
-          <ul class="tags">
-            <li>WordPress</li><li>HTML</li><li>CSS</li>
-          </ul>
-        </article>
-
-        <article class="project">
-          <h3>larstjalsma.dev</h3>
           <p>
-            Deze website. Handgeschreven HTML en CSS, gehost op GitHub Pages met een
-            eigen .dev-domein. DNS en HTTPS heb ik zelf ingericht.
+            Sinds 2023 werk ik naast mijn studie bij Poiesz Supermarkten. Daar heb ik geleerd
+            zelfstandig te werken, goed samen te werken en klantgericht te blijven, ook als
+            het druk is.
           </p>
-          <ul class="tags">
-            <li>HTML</li><li>CSS</li><li>DNS</li>
-          </ul>
-        </article>
-
+          <p><a href="over-mij.html">Meer over mij →</a> &nbsp; <a href="opleiding.html">Mijn opleiding →</a></p>
+        </div>
       </div>
     </section>
 
-    <section id="opleiding-en-werk">
-      <h2>Opleiding en werk</h2>
-      <div class="content">
-        <ol class="timeline">
-          <li>
-            <span class="when">2025 – nu</span>
-            <div>
-              <h3>Bachelor ICT, Software Engineering</h3>
-              <p class="where">NHL Stenden Hogeschool, Leeuwarden</p>
-              <p>
-                Propedeuse behaald in het eerste jaar. Relevante vakken: software
-                engineering, webdevelopment, databaseontwerp, functioneel programmeren,
-                objectgeoriënteerd programmeren en softwareontwerp.
-              </p>
-            </div>
-          </li>
-          <li>
-            <span class="when">2023 – nu</span>
-            <div>
-              <h3>Algemeen winkelmedewerker</h3>
-              <p class="where">Poiesz Supermarkten, Workum</p>
-              <p>
-                Groenteman en kassamedewerker. Bijvullen, producten aantrekkelijk
-                presenteren, kwaliteitscontrole, voorraadcorrecties, bestellen en klanten
-                helpen. Samenwerken in een team en zelfstandig taken plannen en uitvoeren.
-              </p>
-            </div>
-          </li>
-          <li>
-            <span class="when">2020 – 2025</span>
-            <div>
-              <h3>Havo, profiel Natuur en Techniek</h3>
-              <p class="where">RSG Magister Alvinus, Sneek</p>
-              <p>Cum laude geslaagd met een gemiddelde van 8,2.</p>
-            </div>
-          </li>
-        </ol>
+    <section class="section">
+      <div class="wrap">
+        <div class="cta">
+          <div>
+            <h2>Stageplek vanaf februari 2027?</h2>
+            <p>Ik zoek een stage in de IT waar ik mijn technische kennis kan toepassen en van ervaren collega's kan leren.</p>
+          </div>
+          <div class="actions">
+            <a class="button" href="mailto:larstjalsma@gmail.com">larstjalsma@gmail.com</a>
+            <a class="button ghost" href="https://www.linkedin.com/in/lars-tjalsma">LinkedIn</a>
+          </div>
+        </div>
       </div>
     </section>
-
-    <section id="vaardigheden">
-      <h2>Vaardigheden</h2>
-      <div class="content">
-        <dl class="skills">
-          <div>
-            <dt>Programmeertalen</dt>
-            <dd>C#, Java, SQL, Haskell</dd>
-          </div>
-          <div>
-            <dt>Frameworks</dt>
-            <dd>Blazor, JavaFX, WPF</dd>
-          </div>
-          <div>
-            <dt>Web</dt>
-            <dd>HTML, CSS, WordPress, DNS</dd>
-          </div>
-          <div>
-            <dt>Tools</dt>
-            <dd>Git, GitHub, Astah (UML)</dd>
-          </div>
-          <div>
-            <dt>Talen</dt>
-            <dd>Nederlands en Fries (moedertaal), Engels (goed in spraak en schrift)</dd>
-          </div>
-          <div>
-            <dt>Rijbewijs</dt>
-            <dd>B</dd>
-          </div>
-        </dl>
-      </div>
-    </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <div class="content">
-        <p>
-          Heb je een stageplek vanaf februari 2027 of wil je iets vragen? Stuur me een
-          mail op <a href="mailto:larstjalsma@gmail.com">larstjalsma@gmail.com</a> of
-          neem contact op via <a href="https://www.linkedin.com/in/lars-tjalsma">LinkedIn</a>.
-        </p>
-      </div>
-    </section>
-
   </main>
 
-  <footer>
-    <svg class="pompeblad" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 21.5c-1.8-1.6-9.5-6.4-9.5-12A5 5 0 0 1 7.5 4.5c2 0 3.6 1.2 4.5 2.6.9-1.4 2.5-2.6 4.5-2.6a5 5 0 0 1 5 5c0 5.6-7.7 10.4-9.5 12z"/>
-    </svg>
-    <p>Lars Tjalsma, Workum</p>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Lars Tjalsma · Workum, Friesland</p>
+      <ul>
+        <li><a href="mailto:larstjalsma@gmail.com">e-mail</a></li>
+        <li><a href="https://www.linkedin.com/in/lars-tjalsma">linkedin</a></li>
+        <li><a href="https://github.com/Lars3849">github</a></li>
+      </ul>
+    </div>
   </footer>
 
 </body>

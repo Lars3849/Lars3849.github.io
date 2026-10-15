@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Puzzelspel in WPF · Lars Tjalsma</title>
+  <meta name="description" content="Een 2D-puzzelspel in C# en WPF, ontworpen met design thinking: interviews, user stories, schetsen, een Figma-prototype en usability tests.">
+  <meta property="og:title" content="Puzzelspel in WPF · Lars Tjalsma">
+  <meta property="og:description" content="Een 2D-puzzelspel in C# en WPF, ontworpen met design thinking: interviews, user stories, schetsen, een Figma-prototype en usability tests.">
+  <meta property="og:url" content="https://larstjalsma.dev/puzzelspel.html">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#f5f3ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://larstjalsma.dev/puzzelspel.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#inhoud">Naar de inhoud</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="index.html">lars<span>.</span>tjalsma</a>
+      <nav aria-label="Hoofdmenu">
+        <ul class="nav">
+          <li><a href="index.html">home</a></li>
+          <li><a href="projecten.html" aria-current="true">projecten</a></li>
+          <li><a href="opleiding.html">opleiding</a></li>
+          <li><a href="over-mij.html">over mij</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inhoud">
+    <section class="page-head">
+      <div class="wrap">
+        <p class="crumbs"><a href="projecten.html">projecten</a> / puzzelspel</p>
+        <h1>Puzzelspel in WPF</h1>
+        <p class="lead">
+          Het eerste project van HBO ICT draaide om gebruikersinteractie: een 2D-game
+          bouwen in C# en WPF voor een echte klant en een vaste doelgroep. Het spel moest
+          niet alleen werken, maar ook prettig en begrijpelijk zijn voor de speler.
+        </p>
+        <dl class="project-facts">
+          <div><dt>periode</dt><dd>Jaar 1, periode 1</dd></div>
+          <div><dt>vorm</dt><dd>Groepsproject</dd></div>
+          <div><dt>techniek</dt><dd>C#, WPF, Figma</dd></div>
+          <div><dt>doelgroep</dt><dd>Spelers van 30–50 jaar</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap layout">
+        <nav class="toc" aria-label="Op deze pagina">
+          <p>op deze pagina</p>
+          <ol>
+            <li><a href="#opdracht">Opdracht</a></li>
+            <li><a href="#empathize">Empathize</a></li>
+            <li><a href="#define">Define</a></li>
+            <li><a href="#ideate">Ideate</a></li>
+            <li><a href="#prototype">Prototype</a></li>
+            <li><a href="#testen">Testen</a></li>
+            <li><a href="#verbeteren">Verbeteren</a></li>
+            <li><a href="#geleerd">Wat ik leerde</a></li>
+          </ol>
+        </nav>
+
+        <div class="prose">
+          <h2 id="opdracht">De opdracht</h2>
+          <p>
+            We kregen een klant en een doelgroep: spelers van 30 tot 50 jaar. In bijna
+            wekelijkse klantarena's (een soort interview met de hele klas en de klant)
+            haalden we de wensen op. Al in de eerste sessie bleek dat de klant van
+            stripboeken houdt en een stripboekenwebsite beheert. Daarom kreeg het spel een
+            stripboekenthema.
+          </p>
+          <p>
+            We werkten volgens design thinking: <strong>empathize, define, ideate,
+            prototype</strong> en <strong>test &amp; improve</strong>.
+          </p>
+
+          <h2 id="empathize">Empathize: wat wil de speler?</h2>
+          <p>
+            Ik hield een semigestructureerd interview met iemand uit de doelgroep. Ik had
+            vragen voorbereid, maar kon ook doorvragen. Daardoor kwamen er duidelijke
+            inzichten uit:
+          </p>
+          <ul>
+            <li>Puzzelspellen zijn favoriet, maar <strong>tijdsdruk</strong> is de grootste afknapper.</li>
+            <li>Korte levels van zo'n vijf minuten, zodat je zelf bepaalt hoe lang je speelt.</li>
+            <li>Liever een rustig tempo dan snelle reflexen.</li>
+            <li>Humor maakt een spel leuker.</li>
+          </ul>
+
+          <h2 id="define">Define: user stories</h2>
+          <p>
+            De antwoorden uit het interview en de klantarena's vertaalde ik naar user
+            stories volgens het format <em>Als … wil ik … zodat …</em>. Ik maakte acht
+            stories voor de gebruiker en zes voor de klant. Een paar voorbeelden:
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>id</th><th>user story</th></tr></thead>
+              <tbody>
+                <tr><td><code>G3</code></td><td>Als gebruiker wil ik korte spelmomenten hebben, zodat ik mijn speeltijd flexibel kan indelen.</td></tr>
+                <tr><td><code>G8</code></td><td>Als gebruiker wil ik geen tijdsdruk ervaren, zodat ik ontspannen kan blijven spelen.</td></tr>
+                <tr><td><code>K2</code></td><td>Als klant wil ik dat de moeilijkheidsgraad aanpasbaar is, zodat het spel past bij verschillende spelers.</td></tr>
+                <tr><td><code>K6</code></td><td>Als klant wil ik dat de besturing eenvoudig is, zodat de game voor iedereen toegankelijk blijft.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Ook maakte ik een stakeholderanalyse. Daaruit bleek een spanningsveld: de
+            gebruiker wil geen druk, de klant wil juist een uitdagend spel. De kunst was om
+            daar een balans in te vinden.
+          </p>
+
+          <h2 id="ideate">Ideate: 6-to-1</h2>
+          <p>
+            Voor het beginscherm gebruikte ik de 6-to-1-methode: in vijf minuten zes
+            verschillende schetsen maken, per schets de voor- en nadelen opschrijven en
+            daarna de beste kiezen.
+          </p>
+          <figure>
+            <a href="img/schetsen.webp"><img src="img/schetsen.webp" alt="Zes handgetekende schetsen van het beginscherm van het puzzelspel: varianten met tekstknoppen (Play, Settings, Quit), met iconen, met een losse Highscores-knop en met een hamburgermenu." width="1400" height="808" loading="lazy"></a>
+            <figcaption>Fig. 1. De zes schetsen van het beginscherm.</figcaption>
+          </figure>
+          <p>
+            Ik koos een rustige, verticale indeling met tekstknoppen. Voor deze doelgroep
+            is <em>Play</em> duidelijker dan alleen een ▶-icoon. De Highscores-knop uit
+            een andere schets heb ik eronder toegevoegd.
+          </p>
+          <p>
+            Om ideeën te verzamelen gebruikten we als groep ook een mindmap, de
+            Transporter-methode en brainwriting.
+          </p>
+
+          <h2 id="prototype">Prototype: Figma en WPF</h2>
+          <p>
+            In Figma maakten we een klikbaar prototype met een beginscherm, een
+            instellingenscherm, levelselectie en twee levels. Elk groepslid werkte één
+            scherm uit. Ik ontwierp onder andere negen gekleurde bolletjes die bij de
+            stripstijl pasten.
+          </p>
+          <p>
+            Daarna bouwden we het spel in WPF. Je voert je naam in, kiest via de
+            levelselectie een spel en speelt een geheugenspel. Daarin knipperen
+            stripboeken in een steeds langere reeks, die je in dezelfde volgorde moet
+            nadoen.
+          </p>
+
+          <h2 id="testen">Testen: drie soorten tests</h2>
+          <p>
+            Ik stelde een testplan op met succescriteria en voerde drie soorten tests
+            uit:
+          </p>
+          <ol class="steps">
+            <li><strong>Monkey tests:</strong> op elk scherm willekeurig en snel klikken en
+              typen om crashes te vinden. Een heel lange tekst plakken in het naamveld liet
+              het spel vastlopen. Twee keer op <em>Start</em> klikken liet het crashen.</li>
+            <li><strong>Hallway test:</strong> iemand zonder uitleg het spel laten spelen.
+              Navigeren ging goed, maar de bedoeling van het spel was niet direct duidelijk.
+              Er ontbrak ook een terugknop.</li>
+            <li><strong>Guerrilla test:</strong> korte vragen achteraf. Dat leverde eerlijke
+              feedback op, bijvoorbeeld dat bekende stripfiguren makkelijker te onthouden
+              zijn dan stripboekomslagen.</li>
+          </ol>
+
+          <h2 id="verbeteren">Test &amp; improve</h2>
+          <p>Elke gevonden fout kreeg een concreet verbeterpunt:</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>probleem</th><th>verbetering</th></tr></thead>
+              <tbody>
+                <tr><td>Spel loopt vast bij heel lange tekstinvoer</td><td>Invoerlimiet op tekstvelden</td></tr>
+                <tr><td>Crash bij meerdere klikken op Start</td><td>Startknop uitschakelen na één klik</td></tr>
+                <tr><td>Speler weet niet wat de bedoeling is</td><td>Korte uitleg bij de start van het spel</td></tr>
+                <tr><td>Geen terugknop tijdens het spel</td><td>Terugknop toevoegen</td></tr>
+                <tr><td>Knipperen niet zichtbaar onder de cursor</td><td>Duidelijkere animatie</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Die adviezen onderbouwde ik met de heuristieken van Nielsen. Volgens nummer 9
+            moeten foutmeldingen in gewone taal zeggen wat er mis is, bijvoorbeeld:
+            <em>"De naam is te lang. Gebruik maximaal 20 tekens."</em> Volgens nummer 10
+            moet hulp kort zijn en makkelijk te vinden.
+          </p>
+
+          <h2 id="geleerd">Wat ik leerde</h2>
+          <ul>
+            <li>Doorvragen in een interview levert veel meer op dan alleen je lijstje afwerken.</li>
+            <li>Observeren zonder in te grijpen laat de echte problemen van een gebruiker zien.</li>
+            <li>Technische tests en gebruikerstests vullen elkaar aan. Samen geven ze een compleet beeld.</li>
+            <li>Een spel kan technisch werken en toch tegenvallen als de interactie niet past bij de speler.</li>
+          </ul>
+
+          <div class="next">
+            <a href="projecten.html">← alle projecten</a>
+            <a href="slaapomgevingsmeter.html">volgende: slaapomgevingsmeter →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Lars Tjalsma · Workum, Friesland</p>
+      <ul>
+        <li><a href="mailto:larstjalsma@gmail.com">e-mail</a></li>
+        <li><a href="https://www.linkedin.com/in/lars-tjalsma">linkedin</a></li>
+        <li><a href="https://github.com/Lars3849">github</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slaapomgevingsmeter · Lars Tjalsma</title>
+  <meta name="description" content="Een slaapomgevingsmeter met een Arduino UNO R4 WiFi, vijf sensoren, een lcd, een RGB-led, MQTT en een eigen dashboard.">
+  <meta property="og:title" content="Slaapomgevingsmeter · Lars Tjalsma">
+  <meta property="og:description" content="Een slaapomgevingsmeter met een Arduino UNO R4 WiFi, vijf sensoren, een lcd, een RGB-led, MQTT en een eigen dashboard.">
+  <meta property="og:url" content="https://larstjalsma.dev/slaapomgevingsmeter.html">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#f5f3ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://larstjalsma.dev/slaapomgevingsmeter.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#inhoud">Naar de inhoud</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="index.html">lars<span>.</span>tjalsma</a>
+      <nav aria-label="Hoofdmenu">
+        <ul class="nav">
+          <li><a href="index.html">home</a></li>
+          <li><a href="projecten.html" aria-current="true">projecten</a></li>
+          <li><a href="opleiding.html">opleiding</a></li>
+          <li><a href="over-mij.html">over mij</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inhoud">
+    <section class="page-head">
+      <div class="wrap">
+        <p class="crumbs"><a href="projecten.html">projecten</a> / slaapomgevingsmeter</p>
+        <h1>Slaapomgevingsmeter</h1>
+        <p class="lead">
+          Een apparaat dat meet hoe geschikt je slaapkamer is om in te slapen. Een Arduino
+          UNO R4 WiFi leest vijf sensoren uit en berekent een slaapscore. Die zie je op een
+          lcd-scherm, aan de kleur van een led en op een dashboard dat de data via MQTT
+          binnenkrijgt.
+        </p>
+        <dl class="project-facts">
+          <div><dt>periode</dt><dd>Jaar 1, periode 2</dd></div>
+          <div><dt>onderdelen</dt><dd>5 sensoren, 2 actuatoren</dd></div>
+          <div><dt>hardware</dt><dd>Arduino UNO R4 WiFi</dd></div>
+          <div><dt>techniek</dt><dd>C++, MQTT, HTML/CSS/JS</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap layout">
+        <nav class="toc" aria-label="Op deze pagina">
+          <p>op deze pagina</p>
+          <ol>
+            <li><a href="#wat">Wat het doet</a></li>
+            <li><a href="#hardware">Hardware</a></li>
+            <li><a href="#architectuur">Architectuur</a></li>
+            <li><a href="#slaapscore">Slaapscore</a></li>
+            <li><a href="#code">Code</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#geleerd">Wat ik leerde</a></li>
+          </ol>
+        </nav>
+
+        <div class="prose">
+          <h2 id="wat">Wat het doet</h2>
+          <ul>
+            <li>Meet <strong>temperatuur</strong> en <strong>luchtvochtigheid</strong>, <strong>licht</strong>, <strong>luchtkwaliteit</strong> en het <strong>gemiddelde en hoogste geluidsniveau</strong>.</li>
+            <li>Berekent daaruit een <strong>slaapscore</strong> van 0 tot 100.</li>
+            <li>Een RGB-led kleurt <strong>groen</strong> (score boven 75), <strong>oranje</strong> (boven 50) of <strong>rood</strong>.</li>
+            <li>Een 20×4-lcd toont zeven regels met meetwaarden. Met een knop scroll je door de regels.</li>
+            <li>Met een tweede knop, of vanaf het dashboard, zet je het scherm en de led aan of uit.</li>
+            <li>Op het dashboard kies je of de temperatuur in Celsius of Fahrenheit wordt getoond.</li>
+          </ul>
+
+          <h2 id="hardware">Hardware</h2>
+          <p>
+            Bij elke sensor en actuator heb ik de datasheet bestudeerd: hoe het onderdeel
+            werkt, op welke spanning het draait en waar je op moet letten. De AM2302 heeft
+            bijvoorbeeld minimaal twee seconden tussen metingen nodig. De MQ135 moet eerst
+            opwarmen voordat de waarden betrouwbaar zijn.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>onderdeel</th><th>meet / doet</th><th>aansluiting</th></tr></thead>
+              <tbody>
+                <tr><td>AM2302 (DHT22)</td><td>Temperatuur en luchtvochtigheid</td><td><code>D7</code> digitaal</td></tr>
+                <tr><td>LDR (fotoweerstand)</td><td>Lichtintensiteit</td><td><code>A2</code> via spanningsdeler</td></tr>
+                <tr><td>MQ135</td><td>Luchtkwaliteit (gassen)</td><td><code>A3</code> analoog</td></tr>
+                <tr><td>MAX9814</td><td>Geluid (microfoon met AGC)</td><td><code>A0</code> analoog</td></tr>
+                <tr><td>2× drukknop</td><td>Scrollen en aan/uit</td><td><code>D2</code>, <code>D3</code> met pull-up</td></tr>
+                <tr><td>LCD 20×4 met I²C</td><td>Meetwaarden tonen</td><td><code>SDA</code>/<code>SCL</code></td></tr>
+                <tr><td>RGB-led, common anode</td><td>Slaapscore als kleur</td><td><code>D9</code>–<code>D11</code> PWM</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Ik maakte ook een stuklijst (BOM). Alle onderdelen samen kosten ongeveer € 50,
+            waarvan € 24 voor de Arduino.
+          </p>
+          <figure>
+            <a href="img/elektrisch-schema.webp"><img src="img/elektrisch-schema.webp" alt="Elektrisch schema in Tinkercad: een Arduino met breadboard, drie potmeters als vervanging voor de sensoren, een LDR, twee knoppen, een RGB-led met weerstanden en een lcd-scherm." width="680" height="432" loading="lazy"></a>
+            <figcaption>Fig. 1. Elektrisch schema in Tinkercad. Sensoren die Tinkercad niet heeft, zijn vervangen door potmeters.</figcaption>
+          </figure>
+
+          <h2 id="architectuur">Architectuur</h2>
+          <p>
+            De Arduino maakt verbinding met wifi en een Mosquitto MQTT-broker op een laptop.
+            Elke halve seconde publiceert hij alle meetwaarden als JSON op
+            <code>larstjalsma/sensorReadings</code>. Tegelijk luistert hij naar
+            <code>larstjalsma/system</code> (aan/uit) en <code>larstjalsma/tempUnit</code>
+            (°C of °F).
+          </p>
+          <figure>
+            <a href="img/architectuur.webp"><img src="img/architectuur.webp" alt="Architectuurschema: een laptop en de Arduino UNO R4 WiFi verbonden via wifi en MQTT. Om de Arduino heen staan het lcd, de RGB-led, twee knoppen, de AM2302, MAX9814, LDR en MQ135, met een legenda voor 1-wire, I2C en digitale verbindingen." width="1228" height="657" loading="lazy"></a>
+            <figcaption>Fig. 2. Architectuurschema met de MQTT-topics.</figcaption>
+          </figure>
+          <div class="figs">
+            <figure>
+              <a href="img/deployment.webp"><img src="img/deployment.webp" alt="UML-deploymentdiagram: een laptop met Windows 11, de Mosquitto-broker en het dashboard als client, verbonden met een Arduino-client met de libraries ArduinoMqttClient, WiFiS3, LiquidCrystal_I2C, Wire en AM2302-Sensor." width="1161" height="591" loading="lazy"></a>
+              <figcaption>Fig. 3. Deploymentdiagram.</figcaption>
+            </figure>
+            <figure>
+              <a href="img/activiteitendiagram.webp"><img src="img/activiteitendiagram.webp" alt="UML-activiteitendiagram van setup en loop: pins zetten, sensor en lcd starten, verbinden met wifi en MQTT; daarna in de loop MQTT pollen, timers controleren, knoppen en berichten verwerken, sensoren uitlezen, slaapscore berekenen, lcd en led bijwerken en de payload publiceren." width="783" height="848" loading="lazy"></a>
+              <figcaption>Fig. 4. Activiteitendiagram van <code>setup()</code> en <code>loop()</code>.</figcaption>
+            </figure>
+          </div>
+
+          <h2 id="slaapscore">De slaapscore</h2>
+          <p>
+            Elke meetwaarde krijgt een deelscore van 0 tot 100. Die deelscore is hoger naarmate
+            de waarde dichter bij ideaal zit: rond 20 °C, rond 50% luchtvochtigheid, zo
+            donker en zo stil mogelijk en schone lucht. De deelscores tellen gewogen mee:
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>factor</th><th>ideaal</th><th>gewicht</th></tr></thead>
+              <tbody>
+                <tr><td>Temperatuur</td><td>20 °C, −5 punten per graad verschil</td><td class="num">25%</td></tr>
+                <tr><td>Luchtvochtigheid</td><td>50%, −2 punten per procent verschil</td><td class="num">20%</td></tr>
+                <tr><td>Luchtkwaliteit</td><td>Goed = 100, matig = 60, slecht = 30</td><td class="num">20%</td></tr>
+                <tr><td>Licht</td><td>Zo donker mogelijk</td><td class="num">20%</td></tr>
+                <tr><td>Geluid</td><td>Zo stil mogelijk (hoogste piek per minuut)</td><td class="num">15%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="code">
+            <div class="code-bar" aria-hidden="true"><i></i><i></i><i></i><span>SlaapOmgeving.ino</span></div>
+<pre><code><span class="k">void</span> calculateSleepScore() {
+  <span class="k">float</span> tempScore = <span class="n">100</span> - abs(tempC - <span class="n">20</span>) * <span class="n">5</span>;
+  <span class="k">if</span> (tempScore &lt; <span class="n">0</span>) tempScore = <span class="n">0</span>;
+
+  <span class="k">float</span> humScore = <span class="n">100</span> - abs(humidity - <span class="n">50</span>) * <span class="n">2</span>;
+  <span class="k">if</span> (humScore &lt; <span class="n">0</span>) humScore = <span class="n">0</span>;
+
+  <span class="c">// ... luchtkwaliteit, licht en geluid op dezelfde manier ...</span>
+
+  sleepScore =
+    tempScore  * <span class="n">0.25</span> +
+    humScore   * <span class="n">0.20</span> +
+    airScore   * <span class="n">0.20</span> +
+    lightScore * <span class="n">0.20</span> +
+    soundScore * <span class="n">0.15</span>;
+}</code></pre>
+          </div>
+
+          <h2 id="code">De code</h2>
+          <p>
+            De sketch gebruikt geen <code>delay()</code> in de loop. Elke sensor heeft een
+            eigen timer op basis van <code>millis()</code>. Zo blijven de knoppen en
+            MQTT-berichten direct reageren, terwijl de AM2302 elke 2 seconden en de LDR
+            elke 500 ms wordt uitgelezen.
+          </p>
+          <ul>
+            <li><strong>Geluid:</strong> elke 250 ms neemt de Arduino 800 samples van de
+              microfoon en berekent de RMS-waarde (het effectieve geluidsniveau). Per minuut
+              bewaart hij het gemiddelde en de hoogste waarde.</li>
+            <li><strong>Knoppen:</strong> interne pull-up-weerstanden en een debounce van 200 ms.</li>
+            <li><strong>Codeconventies:</strong> volgens de Arduino Style Guide. Functies en
+              variabelen in camelCase, constanten in hoofdletters, pinnen eindigen op
+              <code>_PIN</code> en elke functie heeft één taak, zoals
+              <code>measureSoundRMS()</code>, <code>updateLed()</code> en
+              <code>drawLcd()</code>.</li>
+          </ul>
+
+          <h2 id="dashboard">Het dashboard</h2>
+          <p>
+            Het dashboard heb ik zelf gemaakt met HTML, CSS en JavaScript. Het abonneert
+            zich op de MQTT-topics en heeft drie tabbladen: de actuele waarden, grafieken
+            van het verloop en meters. Met twee knoppen zet je het systeem aan of uit en
+            wissel je tussen Celsius en Fahrenheit.
+          </p>
+          <figure>
+            <a href="img/dashboard-waarden.webp"><img src="img/dashboard-waarden.webp" alt="Dashboard, tabblad Values: gekleurde tegels met Sleep Score 70,11%, Temperature 17,1 °C, Humidity 37,3%, Air Quality Poor, Light Intensity 7%, Sound Average 9,44 dB en Sound Max 38,6 dB, met knoppen System on en Celsius." width="646" height="238" loading="lazy"></a>
+            <figcaption>Fig. 5. Tabblad met actuele waarden.</figcaption>
+          </figure>
+          <div class="figs">
+            <figure>
+              <a href="img/dashboard-grafieken.webp"><img src="img/dashboard-grafieken.webp" alt="Dashboard, tabblad History charts: lijngrafieken van temperatuur, luchtvochtigheid, licht en het gemiddelde en maximale geluid in de tijd." width="648" height="331" loading="lazy"></a>
+              <figcaption>Fig. 6. Grafieken van het verloop.</figcaption>
+            </figure>
+            <figure>
+              <a href="img/dashboard-meters.webp"><img src="img/dashboard-meters.webp" alt="Dashboard, tabblad Gauge charts: zes halve-cirkelmeters voor slaapscore, temperatuur, luchtvochtigheid, licht en geluid." width="658" height="325" loading="lazy"></a>
+              <figcaption>Fig. 7. Meters.</figcaption>
+            </figure>
+          </div>
+
+          <h2 id="geleerd">Wat ik leerde</h2>
+          <ul>
+            <li>Datasheets lezen en daaruit halen wat je echt nodig hebt: spanning, timing en beperkingen.</li>
+            <li>Een elektrisch schema, een architectuurschema en UML-diagrammen maken, zodat iemand anders het product kan nabouwen.</li>
+            <li>Non-blocking programmeren op een microcontroller met timers in plaats van <code>delay()</code>.</li>
+            <li>Publish/subscribe met MQTT en het koppelen van hardware aan een webdashboard.</li>
+          </ul>
+
+          <div class="next">
+            <a href="puzzelspel.html">← vorige: puzzelspel</a>
+            <a href="projecten.html">alle projecten →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Lars Tjalsma · Workum, Friesland</p>
+      <ul>
+        <li><a href="mailto:larstjalsma@gmail.com">e-mail</a></li>
+        <li><a href="https://www.linkedin.com/in/lars-tjalsma">linkedin</a></li>
+        <li><a href="https://github.com/Lars3849">github</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>
